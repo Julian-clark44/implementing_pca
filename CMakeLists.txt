@@ -13,3 +13,8 @@ target_link_libraries(basicPca Eigen3::Eigen)
 
 add_executable(dualPca dual_pca.cc)
 target_link_libraries(dualPca Eigen3::Eigen)
+
+add_executable(imageCompression image_compression.cc)
+target_link_libraries(imageCompression
+	Eigen3::Eigen
+	${OpenCV_LIBS})

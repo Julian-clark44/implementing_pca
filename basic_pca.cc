@@ -1,6 +1,9 @@
 #include <iostream>
 #include <complex>
 #include <chrono>
+#include <cmath>
+#include <vector>
+#include <tuple>
 
 #include <Eigen/Core>
 #include <Eigen/Eigenvalues>
