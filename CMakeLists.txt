@@ -18,3 +18,9 @@ add_executable(imageCompression image_compression.cc)
 target_link_libraries(imageCompression
 	Eigen3::Eigen
 	${OpenCV_LIBS})
+
+add_executable(planeReconstruction plane_reconstruction.cc)
+target_link_libraries(planeReconstruction
+	Eigen3::Eigen
+	Sophus::Sophus
+	${Pangolin_LIBRARIES})

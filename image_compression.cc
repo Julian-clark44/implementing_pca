@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
 	BDCSVD<Matrix<float, Dynamic, Dynamic>> svd(eigen_image_float, ComputeThinV);
 	MatrixXf V = svd.matrixV();
 
-	// Resize V and sigma.
+	// Resize V.
 	int rows = V.rows();
 	int cols = V.cols();
 	int d = modifier * cols;
