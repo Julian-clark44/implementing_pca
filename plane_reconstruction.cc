@@ -6,7 +6,7 @@
 #include <cmath>
 
 #include <pangolin/pangolin.h>
-#include <sophus/se3.hpp>
+#include <sophus/so3.hpp>
 #include <Eigen/Core>
 #include <Eigen/SVD>
 
@@ -59,19 +59,18 @@ int main(int argc, char **argv) {
 	std::default_random_engine e(r());
 	std::uniform_real_distribution<float> dist(-1, 1);
 
-	// Generate a random SE(3) object.
-	Vector<float, 6> se3 = {2 * dist(e), 2 * dist(e), 2 * dist(e),
-		10 * dist(e), 10 * dist(e), 10 * dist(e)};
-	Sophus::SE3f T = Sophus::SE3f::exp(se3);
+	// Generate a random SO(3) object.
+	Vector3f so3 = {10 * dist(e), 10 * dist(e), 10 * dist(e)};
+	Sophus::SO3f R = Sophus::SO3f::exp(so3);
 
-	// Generate the surface of a plane with a small amount of noise, and transform it by the
-	// random SE(3) object.
+	// Generate the surface of a plane with a small amount of noise, and rotate it by the
+	// random SO(3) object.
 	std::vector<Vector3f, aligned_allocator<Vector3f>> truth_cloud;
 	for (int i = -5; i <= 5; i++)
 	for (int j = -5; j <= 5; j++) {
 		Vector3f p = {i, j, 0};
 		Vector3f noise = {dist(e) * 0.35, dist(e) * 0.35, dist(e) * 0.35};
-		Vector3f p_final = T * (p + noise);
+		Vector3f p_final = R * (p + noise);
 		truth_cloud.push_back(std::move(p_final));
 	};
 
