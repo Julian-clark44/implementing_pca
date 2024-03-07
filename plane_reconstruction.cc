@@ -68,15 +68,14 @@ int main(int argc, char **argv) {
 	for (int i = -5; i <= 5; i++)
 	for (int j = -5; j <= 5; j++) {
 		Vector3f p = {i, j, 0};
-		Vector3f noise = {dist(e) * 0.35, dist(e) * 0.35, dist(e) * 0.35};
+		Vector3f noise = {dist(e) * 0.35, dist(e) * 0.35, dist(e) * 1.0};
 		Vector3f p_final = R * (p + noise);
 		truth_cloud.push_back(std::move(p_final));
 	};
 
 	// Convert the truth point cloud into a matrix.
 	int num_points = truth_cloud.size();
-	Matrix3Xf truth_cloud_mat;
-	truth_cloud_mat.resize(3, num_points);
+	Matrix3Xf truth_cloud_mat(3, num_points);
 	for (int i = 0; i < num_points; i++) {
 		truth_cloud_mat.col(i) = truth_cloud[i];
 	}
